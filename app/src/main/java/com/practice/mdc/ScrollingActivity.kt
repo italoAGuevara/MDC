@@ -1,24 +1,60 @@
 package com.practice.mdc
 
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.practice.mdc.databinding.ActivityScrollingBinding
 
 class ScrollingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScrollingBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityScrollingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*findViewById<FloatingActionButton>(R.id.fab).setOnClickListener{
+            if( findViewById<BottomAppBar>(R.id.bottom_app_bar).fabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER ){
+                findViewById<BottomAppBar>(R.id.bottom_app_bar).fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+            } else {
+                findViewById<BottomAppBar>(R.id.bottom_app_bar).fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+            }
+        }*/
+        binding.fab.setOnClickListener{
+            if( binding.bottomAppBar.fabAlignmentMode == BottomAppBar.FAB_ALIGNMENT_MODE_CENTER ){
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+            } else {
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+            }
+        }
+
+        binding.bottomAppBar.setNavigationOnClickListener{
+            Snackbar.make( binding.root, R.string.message_action_success, Snackbar.LENGTH_LONG)
+                .setAnchorView(binding.fab)
+                .show()
+        }
+
+        binding.content.btnSkip.setOnClickListener {
+            binding.content.cvAdd.visibility = View.GONE
+
+        }
+
+        binding.content.btnComprar.setOnClickListener {
+            Snackbar.make(it, R.string.card_buying, Snackbar.LENGTH_LONG)
+                .setAnchorView(binding.fab)
+                .setAction(R.string.card_to_go, {
+                    Toast.makeText(this, R.string.card_historial, Toast.LENGTH_SHORT)
+                        .show()
+                })
+                .show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

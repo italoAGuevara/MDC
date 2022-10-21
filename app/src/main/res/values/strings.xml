@@ -95,4 +95,12 @@
     <string name="card_input_url">image url</string>
     <string name="card_required">Required</string>
     <string name="card_password">Password</string>
+    <string name="card_enable_pass">Enable password</string>
+    <string name="card_toogle_red">red</string>
+    <string name="card_toogle_blue">Blue</string>
+    <string name="card_toogle_green">Green</string>
+    <string name="message_action_success">Evento Exitoso!</string>
+    <string name="card_buying">Comprar</string>
+    <string name="card_to_go">ir</string>
+    <string name="card_historial">Historial</string>
 </resources>

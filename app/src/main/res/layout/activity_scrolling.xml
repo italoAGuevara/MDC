@@ -8,7 +8,9 @@
     tools:context=".ScrollingActivity">
 
 
-    <include layout="@layout/content_scrolling" />
+    <include
+        android:id="@+id/content"
+        layout="@layout/content_scrolling" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
@@ -19,6 +21,7 @@
         app:navigationIconTint="@android:color/white"
         app:menu="@menu/menu_scrolling"
         app:hideOnScroll="true"
+        app:fabAnimationMode="scale"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
