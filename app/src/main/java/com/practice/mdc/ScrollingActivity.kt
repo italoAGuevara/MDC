@@ -1,12 +1,16 @@
 package com.practice.mdc
 
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.practice.mdc.databinding.ActivityScrollingBinding
 
@@ -49,11 +53,45 @@ class ScrollingActivity : AppCompatActivity() {
         binding.content.btnComprar.setOnClickListener {
             Snackbar.make(it, R.string.card_buying, Snackbar.LENGTH_LONG)
                 .setAnchorView(binding.fab)
-                .setAction(R.string.card_to_go, {
+                .setAction(R.string.card_to_go, ({
                     Toast.makeText(this, R.string.card_historial, Toast.LENGTH_SHORT)
                         .show()
-                })
+                }))
                 .show()
+        }
+
+        loadImage()
+
+        binding.content.cbEnablePass.setOnClickListener {
+            binding.content.tilPassword.isEnabled = !binding.content.tilPassword.isEnabled
+        }
+
+        binding.content.etUrl.onFocusChangeListener = View.OnFocusChangeListener { _, focused ->
+            var errorStr : String? = null
+            val url = binding.content.etUrl.text.toString()
+
+            if( !focused ){
+
+                if( url.isEmpty() ){
+                     errorStr = getString((R.string.card_required))
+                }else if( URLUtil.isValidUrl(url)){
+                    loadImage( url )
+                }else{
+                    errorStr = getString(R.string.card_invalid_url)
+                }
+            }
+
+            binding.content.tilUrl.error = errorStr
+        }
+
+        binding.content.toogleButton.addOnButtonCheckedListener{ _, checkeId, _ ->
+            binding.content.root.setBackgroundColor(
+                when(checkeId){
+                    R.id.btnRed -> Color.RED
+                    R.id.btnBlue -> Color.BLUE
+                    else -> Color.GREEN
+                }
+            )
         }
     }
 
@@ -72,5 +110,15 @@ class ScrollingActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun loadImage(
+        url : String = "https://i.ytimg.com/vi/_sn2JCtCbjQ/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCppupqlzL57SKsi_Nkc6QCVAoPAQ"
+    ){
+        Glide.with( this)
+            .load( url )
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .centerCrop()
+            .into( binding.content.imgCover )
     }
 }

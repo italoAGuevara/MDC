@@ -119,7 +119,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgCover"/>
-3
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilUrl"
                     android:layout_width="0dp"
@@ -195,7 +195,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
                 <TextView
-                    android:id="@+id/tvmessagAlt"
+                    android:id="@+id/tv_message_alt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/large_text"
@@ -214,7 +214,8 @@
                     android:layout_marginVertical="@dimen/common_padding_default"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvmessagAlt">
+                    app:layout_constraintTop_toBottomOf="@+id/tv_message_alt"
+                    app:singleSelection="true">
 
                     <Button
                         android:id="@+id/btnRed"
